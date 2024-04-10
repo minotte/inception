@@ -1,4 +1,4 @@
-FROM alpine:3.14
+FROM alpine:3.18
 
 RUN apk update  && apk add wget && apk add --no-cache\
 	nginx 		\
@@ -12,12 +12,8 @@ RUN mkdir -p /etc/nginx/ssl && \
 
 COPY /conf/nginx.conf /etc/nginx/nginx.conf
 
-RUN chmod 755 /var/www/html 
+RUN chmod 775 /var/www/html 
 
-EXPOSE  443
-
-RUN sudo chown -R nminotte:nminotte /var/www && \
-	chown -R nminotte:nminotte /var/www/html &&\
-	chown -R nminotte:nminotte /etc/nginx/nginx.conf
+RUN chown -R nginx:nginx /var/www/html
 
 CMD [ "nginx", "-g", "daemon off;" ]
