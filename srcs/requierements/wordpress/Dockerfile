@@ -1,6 +1,7 @@
 FROM alpine:3.18
 
 RUN apk update  && apk add wget && apk add --no-cache \
+		wget			\
 		php     	   \
 		php-mysqli		\
 		php-fpm		   \
@@ -18,12 +19,9 @@ RUN wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.ph
 RUN chmod +x wp-cli.phar
 # RUN mv wp-cli.phar /usr/local/bin/wp
 
-#RUN mv /var/www/wordpress/wp-config-sample.php /var/www/wordpress/wp-config.php
-#COPY /conf/www.conf /etc/php7/php-fpm.d/www.conf
+COPY /conf/www.conf /etc/php81/php-fpm.d/www.conf
 COPY /conf/auto_config.sh /home/
 RUN chmod 775 /home/auto_config.sh
-# RUN ls /var/www/wordpress/
+
 
 ENTRYPOINT ["sh", "/home/auto_config.sh"]
-
-# ENTRYPOINT ["sh"]

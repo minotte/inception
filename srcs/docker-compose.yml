@@ -2,7 +2,6 @@ version: '3.8'
 
 services:
 
-
   nginx:
     container_name: nginx
     volumes:
@@ -49,7 +48,7 @@ services:
     restart: unless-stopped 
     expose:
       - "3306"
-    tty: true
+    #tty: true
     # health_check: 
     
 
