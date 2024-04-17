@@ -1,24 +1,42 @@
 containerName = "inception"
-isContainerRunning := $(shell docker ps | grep $(containerName) > /dev/null 2>&1 && echo 1)
 
+COMPOSE_PROJECT_NAME = Inception
 
-DOCKER_COMPOSE := docker-compose
+DOCKER_COMPOSE_FILE := /home/kali/Documents/inception/srcs/docker-compose.yml
 
-build-docker:
-	$(DOCKER_COMPOSE) pull --ignore-pull-failures
-	$(DOCKER_COMPOSE) build --no-cache
+DOCKER_COMPOSE := docker-compose -f 
 
 up:
 	@echo "Launching containers from project $(COMPOSE_PROJECT_NAME)..."
-	$(DOCKER_COMPOSE) up -d
-	$(DOCKER_COMPOSE) ps
+	$(DOCKER_COMPOSE) $(DOCKER_COMPOSE_FILE) up -d --build
+	@echo "\n\n"
+	@docker ps
+	@echo "\n"
+
+start:
+	@echo "Starting containers from $(COMPOSE_PROJECT_NAME)..."
+	$(DOCKER_COMPOSE) $(DOCKER_COMPOSE_FILE) start
+	@echo "\n\n"
+	@docker ps
+	@echo "\n"
 
 stop:
-	@echo "Stopping containers from project $(COMPOSE_PROJECT_NAME)..."
-	$(DOCKER_COMPOSE) stop
-	$(DOCKER_COMPOSE) ps
+	@echo "Stopping containers from $(COMPOSE_PROJECT_NAME)..."
+	$(DOCKER_COMPOSE) $(DOCKER_COMPOSE_FILE) stop
+	@echo "\n\n"
+	@docker ps
+	@echo "\n"
 
 prune:
-	@docker-compose down --remove-orphans
-	@docker-compose down --volumes
-	@docker-compose rm -f
+	$(DOCKER_COMPOSE) $(DOCKER_COMPOSE_FILE)  down --v
+	@docker system prune -af
+	@echo "\n\n"
+	@docker ps
+	@echo "\n"
+
+clean:
+	$(DOCKER_COMPOSE) $(DOCKER_COMPOSE_FILE) down --v
+	@docker system prune -af
+	@sudo rm -rf /home/kali/data/mariadb/* ~/data/wordpress/* 
+
+.PHONY: up start prune stop clean

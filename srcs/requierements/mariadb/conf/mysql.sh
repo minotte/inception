@@ -13,5 +13,5 @@ mariadb -e "GRANT ALL PRIVILEGES ON \`${MYSQL_DATABASE}\`.* TO '${MYSQL_USER}'@'
 # mariadb -e "DROP TABLE IF EXISTS mariadb_posts;"
 mariadb -e "FLUSH PRIVILEGES;"
 mariadb-admin -u root -p$MYSQL_ROOT_PASSWORD shutdown
-#docker exec mariadbd mariadbd-safe
+#exec mariadbd-safe
 mysqld
