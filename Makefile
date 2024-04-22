@@ -2,7 +2,7 @@ containerName = "inception"
 
 COMPOSE_PROJECT_NAME = Inception
 
-DOCKER_COMPOSE_FILE := /home/kali/Documents/inception/srcs/docker-compose.yml
+DOCKER_COMPOSE_FILE := ./srcs/docker-compose.yml
 
 DOCKER_COMPOSE := docker-compose -f 
 
