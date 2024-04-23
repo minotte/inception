@@ -2,11 +2,11 @@ containerName = "inception"
 
 COMPOSE_PROJECT_NAME = Inception
 
-DOCKER_COMPOSE_FILE := /home/kali/Documents/inception/srcs/docker-compose.yml
+DOCKER_COMPOSE_FILE := ./srcs/docker-compose.yml
 
 DOCKER_COMPOSE := docker-compose -f 
 
-up:
+all:
 	@echo "Launching containers from project $(COMPOSE_PROJECT_NAME)..."
 	$(DOCKER_COMPOSE) $(DOCKER_COMPOSE_FILE) up -d --build
 	@echo "\n\n"
@@ -37,6 +37,6 @@ prune:
 clean:
 	$(DOCKER_COMPOSE) $(DOCKER_COMPOSE_FILE) down --v
 	@docker system prune -af
-	@sudo rm -rf /home/kali/data/mariadb/* ~/data/wordpress/* 
+	@sudo rm -rf /home/kali/data/mariadb/* /home/kali/data/wordpress/* 
 
-.PHONY: up start prune stop clean
+.PHONY: all start prune stop clean

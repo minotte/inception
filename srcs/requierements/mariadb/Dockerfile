@@ -10,8 +10,6 @@ RUN apt-get update -y && \
 COPY /conf/50-server.cnf /etc/mysql/mariadb.conf.d/
 COPY /conf/mysql.sh /etc/mysql/mariadb.conf.d/
 
-#RUN touch /var/log/mysql/error.log
-
 EXPOSE	3306
 
 RUN chmod 775 /etc/mysql/mariadb.conf.d/mysql.sh && \
