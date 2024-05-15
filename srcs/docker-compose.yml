@@ -17,7 +17,7 @@ services:
     image : nginx:1.0
     ports:
       - "443:443"
-    restart: on-failure
+    restart: always
 
   wordpress:
     container_name: wordpress
@@ -47,7 +47,7 @@ services:
     env_file: .env
     volumes:
       - mariadb:/var/lib/mysql
-    restart: unless-stopped
+    restart: always
     image : mariadb:1.0 
     expose:
       - "3306" 
