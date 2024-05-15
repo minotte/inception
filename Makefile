@@ -37,6 +37,6 @@ prune:
 clean:
 	$(DOCKER_COMPOSE) $(DOCKER_COMPOSE_FILE) down --v
 	@docker system prune -af
-	@sudo rm -rf /home/kali/data/mariadb/* /home/kali/data/wordpress/* 
+	@sudo rm -rf /home/nminotte/data/mariadb/* /home/nminotte/data/wordpress/* 
 
 .PHONY: all start prune stop clean
